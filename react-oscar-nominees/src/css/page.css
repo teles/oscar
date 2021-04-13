@@ -1,0 +1,42 @@
+@import "base.css";
+
+.page {
+    box-sizing: border-box;
+}
+
+.page__content {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page__title {
+    grid-area: title;
+    font-size: 1.2em;
+    padding: 0 20px;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.page__navbar {
+    display: grid;
+    grid-template-columns: 1fr 1024px 1fr;
+    grid-template-areas: ". title .";
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--color-dark);
+    padding: 10px;
+}
+
+.page__footer {
+    background-color: var(--color-dark);
+}
+
+.page__footer__content {
+    max-width: 1024px;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+    padding: 0;
+}

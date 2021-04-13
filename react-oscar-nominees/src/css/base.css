@@ -1,0 +1,19 @@
+:root {
+    --color-gold: #c79f27;
+    --color-dark: #111;
+    --color-white: #fff;
+    --color-opaque-white: rgba(255, 255, 255, .6);
+    --color-eigengrau: #16161d;
+}
+
+html body {
+    padding: 0;
+    margin: 0;
+    background-color: var(--color-eigengrau);
+}
+
+html body,
+html body * {
+    box-sizing: border-box;
+    font-family: system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji';
+}

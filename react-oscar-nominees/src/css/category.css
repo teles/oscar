@@ -1,0 +1,28 @@
+@import "base.css";
+
+.category,
+.category--is-full-height {
+    padding: 40px 0;
+}
+
+.category--is-full-height {
+    min-height: 100vh;
+}
+
+.category__title {
+    text-transform: uppercase;
+    color: var(--color-gold);
+    font-weight: 100;
+    font-size: 2rem;
+    line-height: 1;
+    margin: 20px auto;
+    display: inline-block;
+}
+
+.category__title:after {
+    content: "";
+    background: var(--color-gold);
+    height: 1px;
+    width: 100%;
+    display: inline-block;
+}
