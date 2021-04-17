@@ -2,11 +2,6 @@
 # yarn lockfile v1
 
 
-"1-liners@^0.4.2":
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/1-liners/-/1-liners-0.4.2.tgz#93412925eb35e85391f91c015ddf44dff6a783ac"
-  integrity sha512-R3wiYhkUgwfhg5lhPSEKANTot/SJ1UK4nsf7oX2fb7fl936/yIMvO9Jr9FLCXlJ6A9WllCbgAGN60JEJQT7+XA==
-
 "@babel/code-frame@7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
@@ -9792,6 +9787,11 @@ slice-ansi@^4.0.0:
     ansi-styles "^4.0.0"
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
+
+slugify@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.5.0.tgz#5f3c8e2a84105b54eb51486db1b468a599b3c9b8"
+  integrity sha512-Q2UPZ2udzquy1ElHfOLILMBMqBEXkiD3wE75qtBvV+FsDdZZjUqPZ44vqLTejAVq+wLLHacOMcENnP8+ZbzmIA==
 
 snapdragon-node@^2.0.1:
   version "2.1.1"

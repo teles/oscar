@@ -1,10 +1,10 @@
 import React from "react";
-import Nominees from "./components/Nominees";
+import Page from "./components/Page";
 
 function App() {
   return (
     <React.Fragment>
-      <Nominees/>
+      <Page/>
     </React.Fragment>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/cards.css";
 
-class NomineeCard extends React.Component {
+class Card extends React.Component {
 
     render() {
         const {movie, image, nominees} = this.props.card;
@@ -28,4 +28,4 @@ class NomineeCard extends React.Component {
     }
 }
 
-export default NomineeCard;
+export default Card;

@@ -12,21 +12,25 @@
 
 .page__title {
     grid-area: title;
-    font-size: 1.2em;
+    font-size: 1.6em;
     padding: 0 20px;
     color: #fff;
-    font-weight: bolder;
+    font-weight: 100;
 }
 
 .page__navbar {
-    display: grid;
-    grid-template-columns: 1fr 1024px 1fr;
-    grid-template-areas: ". title .";
-    position: sticky;
+    display: block;
     top: 0;
     z-index: 1;
-    background-color: var(--color-dark);
     padding: 10px;
+    background-color: #000;
+}
+@media (min-width: 768px) {
+    .page__navbar {
+        display: grid;
+        grid-template-columns: 1fr 1024px 1fr;
+        grid-template-areas: ". title .";
+    }
 }
 
 .page__footer {
@@ -38,5 +42,5 @@
     margin: 0 auto;
     text-align: center;
     color: #fff;
-    padding: 0;
+    padding: 20px;
 }
