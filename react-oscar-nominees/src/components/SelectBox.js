@@ -1,22 +1,18 @@
 import React from "react";
 
 class SelectBox extends React.Component {
-    constructor(props) {
-        super(props);
-        const logValue = (event) => console.log(event.target.value);
-        this.state = {
-            id: props.id || null,
-            title: props.title || null,
-            options: props.options || [],
-            onSelect: props.onSelect || logValue
-        }
-    }
 
     render() {
-        const {id, title, options, onSelect} = this.state;
+        const {id, label, options, onSelect} = {
+            id: this.props.id || null,
+            label: this.props.label || null,
+            options: this.props.options || [],
+            onSelect: (event) => this.props.onSelect(event.target.value)
+        };
+
         return (
             <div className='select-box'>
-                {title && <label htmlFor={id} className='select-box__label'>{title}</label> }
+                {label && <label htmlFor={id} className='select-box__label'>{label}</label> }
                 <div className='select-box__select'>
                     <select id={id} className='select-box__select__select' onChange={onSelect}>
                         { options.map((option, index) => (

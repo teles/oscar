@@ -42,6 +42,14 @@
     outline: none;
 }
 
+.category__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 175px));
+    grid-gap: 20px;
+    overflow-x: auto;
+    padding: 0;
+}
+
 @media(min-width: 768px) {
 
     .category__back-to-top-button {

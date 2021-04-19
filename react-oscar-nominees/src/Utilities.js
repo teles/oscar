@@ -1,13 +1,17 @@
 import slugify from "slugify";
 
-const groupBy = function(xs, key) {
-    return xs.reduce(function(rv, x) {
-        (rv[x[key]] = rv[x[key]] || []).push(x);
-        return rv;
-    }, {});
-};
+const titleToId = title => slugify(title.normalize('NFD'), {lower: true}).replace(/[()'"?!`~]/g, '');
 
-const titleToId = title => slugify(title, {lower: true}).replace(/[()]/g, '');
+const dataToSections = (data, predicate, adapter = x => x) => data.reduce((total, item) => {
+    const current = total.find(x => x.name === predicate(item)) || {};
+    current.name
+        ? current.items.push(adapter(item))
+        : total.push({
+            name: predicate(item),
+            items: [adapter(item)]
+        });
+    return total;
+}, []);
 
-export {groupBy};
+export {dataToSections};
 export {titleToId};

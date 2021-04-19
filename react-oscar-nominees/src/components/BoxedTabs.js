@@ -5,27 +5,30 @@ class BoxedTabs extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tabs: props.tabs,
-            activeTabIndex: props.tabs.findIndex(tab => tab.isActive === true)
+            tabs: this.props.tabs
         }
     }
-    select(tabIndex) {
+
+    select(tab) {
         this.setState({
-            activeTabIndex: tabIndex
+            tabs: Object.assign(this.state.tabs, (this.state.tabs, {
+                active: tab.id
+            }))
         });
+        this.props.onSelect(tab.id);
     }
 
     render() {
-        const {tabs, activeTabIndex} = this.state;
+        const {tabs} = this.state;
         return (
             <div className='boxed-tabs'>
                 <ul className='boxed-tabs__list'>
-                    {tabs.map((tab, index) => {
+                    {tabs.items.map((tab, index) => {
                         return (
                             <li
                                 key={index}
-                                onClick={this.select.bind(this, index)}
-                                className={activeTabIndex === index ? 'boxed-tabs__tab--active' : 'boxed-tabs__tab'}>
+                                onClick={this.select.bind(this, tab, index)}
+                                className={tabs.active === tab.id ? 'boxed-tabs__tab--active' : 'boxed-tabs__tab'} >
                                 {tab.name}
                             </li>
                         )

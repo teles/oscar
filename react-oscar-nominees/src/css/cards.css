@@ -1,33 +1,10 @@
 @import "base.css";
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    grid-gap: 20px;
-    overflow-x: auto;
-    padding: 0;
-}
-
-.cards:hover .card,
-.cards:hover .card--is-selected {
-    opacity: .5;
-    filter: grayscale(.5);
-}
-
-.cards .card,
-.cards .card:hover,
-.cards .card--is-selected,
-.cards .card--is-selected:hover {
-    opacity: 1;
-    cursor: pointer;
-    transition: all ease-in .2s;
-    filter: grayscale(0);
+.card,
+.card--is-selected {
     padding: 2px;
     display: flex;
     flex-direction: column;
-}
-.card,
-.card--is-selected {
     border: 1px solid var(--color-eigengrau);
 }
 
@@ -57,4 +34,5 @@
 .card__image {
     object-fit: cover;
     min-height: 255px;
+    cursor: pointer;
 }
