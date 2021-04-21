@@ -2,6 +2,7 @@ import {titleToId} from "../Utilities";
 import SelectBox from "./SelectBox";
 import Card from "./Card";
 import React from "react";
+import "../css/utilities.css";
 
 class PageSection extends React.Component {
     constructor(props) {
@@ -57,9 +58,10 @@ class PageSection extends React.Component {
                     return (
                         <section id={titleToId(item.name)} className='category' key={index}>
                             <h2 className='category__title'>{item.name}</h2>
-                            <ul className='category__cards'>
+                            <ul className='category__cards u-opacity-on-hover-parent'>
                                 {item.items.map((card, cardIndex) => (
                                     <Card
+                                        className='u-opacity-on-hover-parent__item'
                                         isSelected={selections[this.getSelectionKey(index)] === cardIndex}
                                         onSelect={this.select.bind(this, index, cardIndex)}
                                         title={card.title}

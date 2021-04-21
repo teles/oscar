@@ -1,0 +1,13 @@
+.u-opacity-on-hover-parent .u-opacity-on-hover-parent__item {
+    transition: all .35s ease-in;
+}
+
+.u-opacity-on-hover-parent:hover .u-opacity-on-hover-parent__item {
+    opacity: .5;
+    filter: grayscale(.5);
+}
+
+.u-opacity-on-hover-parent:hover .u-opacity-on-hover-parent__item:hover {
+    opacity: 1;
+    filter: grayscale(0);
+}
