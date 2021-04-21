@@ -123,8 +123,8 @@ class Page extends React.Component {
                             :
                             <div className='page__content'>
                                 <PageSection
+                                    id={activeTab}
                                     items={sections[activeTab]}
-                                    selections={{}}
                                     pageTopReference={pageTopReference}
                                 />
                             </div>

@@ -11,18 +11,22 @@ class PageSection extends React.Component {
         }
     }
 
+    getSelectionKey(categoryId) {
+        return `${this.props.id}_${categoryId}`;
+    }
+
     select(categoryId, cardId) {
+        const keyValue = this.getSelectionKey(categoryId);
         this.setState(Object.assign(this.state.selections,{
-           [categoryId]: cardId
+           [keyValue]: cardId
         }));
-        console.log(this.state.selections);
     }
 
     render() {
 
-        const {items, pageTopReference} = {
+        const {items, selections, pageTopReference} = {
             items: this.props.items.items,
-            selections: this.props.selections,
+            selections: this.state.selections,
             pageTopReference: `#${this.props.pageTopReference}`
         };
 
@@ -56,6 +60,8 @@ class PageSection extends React.Component {
                             <ul className='category__cards'>
                                 {item.items.map((card, cardIndex) => (
                                     <Card
+                                        isSelected={selections[this.getSelectionKey(index)] === cardIndex}
+                                        onSelect={this.select.bind(this, index, cardIndex)}
                                         title={card.title}
                                         alt={card.title}
                                         subtitle={card.subtitle}

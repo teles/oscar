@@ -4,13 +4,14 @@ import "../css/cards.css";
 class Card extends React.Component {
 
     render() {
-        const {title, subtitle, alt, image } = this.props;
+        const {title, subtitle, alt, image, onSelect, isSelected } = this.props;
 
         return (
-            <li className='card'>
+            <li className={isSelected ? 'card--is-selected' : 'card'} >
                 { image && image.src &&
                 <img
                     loading='lazy'
+                    onClick={onSelect}
                     className='card__image'
                     src={image.src}
                     alt={alt}
