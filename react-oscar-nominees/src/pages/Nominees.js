@@ -93,7 +93,11 @@ class Nominees extends React.Component {
                     <h2 className='category__title'>{section.name}</h2>
                     <ul className='category__cards u-opacity-on-hover-parent'>
                         {section.items.map((item, innerIndex) => {
-                            return <Card key={innerIndex} {...item} />
+                            return <Card
+                                className='u-opacity-on-hover-parent__item'
+                                key={innerIndex}
+                                {...item}
+                            />
                         })}
                     </ul>
                 </section>
