@@ -1,12 +1,12 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import Page from "./components/Page";
+import "./css/page.css";
 
-function App() {
-  return (
-    <React.Fragment>
-      <Page/>
-    </React.Fragment>
-  );
+export default function App() {
+    return (
+        <Router>
+            <Page/>
+        </Router>
+    );
 }
-
-export default App;

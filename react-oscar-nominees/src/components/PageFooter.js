@@ -1,4 +1,6 @@
 import React from "react";
+import "../css/page.css";
+import "../css/anchor.css";
 
 class PageFooter extends React.Component {
     render() {

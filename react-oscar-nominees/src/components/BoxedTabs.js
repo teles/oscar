@@ -1,42 +1,39 @@
 import React from "react";
+import Routes from "../Routes";
+import PropTypes from "prop-types";
+import {Link, withRouter} from "react-router-dom";
 import "../css/boxed-tabs.css";
 
 class BoxedTabs extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            tabs: this.props.tabs
-        }
-    }
-
-    select(tab) {
-        this.setState({
-            tabs: Object.assign(this.state.tabs, (this.state.tabs, {
-                active: tab.id
-            }))
-        });
-        this.props.onSelect(tab.id);
-    }
+    static propTypes = {
+        location: PropTypes.object.isRequired
+    };
 
     render() {
-        const {tabs} = this.state;
+        const {location} = this.props;
+
         return (
             <div className='boxed-tabs'>
                 <ul className='boxed-tabs__list'>
-                    {tabs.items.map((tab, index) => {
-                        return (
-                            <li
-                                key={index}
-                                onClick={this.select.bind(this, tab, index)}
-                                className={tabs.active === tab.id ? 'boxed-tabs__tab--active' : 'boxed-tabs__tab'} >
-                                {tab.name}
-                            </li>
-                        )
+                    {Object.keys(Routes).map((routeName, index) => {
+                        return <li
+                            className={
+                                location.pathname === Routes[routeName].path ? 'boxed-tabs__tab--active' : 'boxed-tabs__tab'
+                            }
+                            key={index}
+                        >
+                            <Link
+                                className='boxed-tabs__tab__link'
+                                to={{pathname: Routes[routeName].path, search: location.search }}
+                            >
+                                {Routes[routeName].title}
+                            </Link>
+                        </li>
                     })}
                 </ul>
             </div>
         );
     }
-
 }
-export default BoxedTabs;
+
+export default withRouter(BoxedTabs);

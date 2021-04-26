@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/select-box.css";
 
 class SelectBox extends React.Component {
 
@@ -7,7 +8,7 @@ class SelectBox extends React.Component {
             id: this.props.id || null,
             label: this.props.label || null,
             options: this.props.options || [],
-            onSelect: (event) => this.props.onSelect(event.target.value)
+            onSelect: (event) => this.props.onSelect ? this.props.onSelect(event.target.value) : x => x
         };
 
         return (

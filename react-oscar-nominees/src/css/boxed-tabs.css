@@ -32,13 +32,13 @@
     border-style: solid;
     border-color: var(--color-gold);
     position: relative;
-    padding: 14px 20px 6px 20px;
     border-radius: 4px 4px 0 0;
     margin-left: 8px;
     cursor: pointer;
     background-color: #16161d;
     line-height: 20px;
     font-weight: 400;
+    padding: 0;
 }
 
 .boxed-tabs__tab {
@@ -59,4 +59,11 @@
 
 .boxed-tabs__tab:hover {
     color: #fff;
+}
+
+.boxed-tabs__tab__link {
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+    padding: 14px 20px 6px 20px;
 }
