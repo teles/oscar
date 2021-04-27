@@ -5,9 +5,10 @@ import NomineesByYear from '../NomineesByYear';
 import SelectBox from '../components/SelectBox';
 import {dataToSections, titleToId} from '../Utilities';
 import Card from '../components/Card';
-import '../css/category.css';
 import SingleCheckbox from "../components/SingleCheckbox";
 import CardSkeleton from "../components/CardSkeleton";
+import StorageManager from "../StorageManager";
+import '../css/category.css';
 
 class Nominees extends React.Component {
     constructor(props) {
@@ -27,12 +28,12 @@ class Nominees extends React.Component {
             currentYear: this.options[0].value,
             showWinners: false
         };
+        this.storage = new StorageManager('local');
     }
 
     loadNominees(year) {
         this.setState({isLoading: true});
-        const hasNotLoadedThisYearBefore = this.state.sections[year].length === 0;
-        if (hasNotLoadedThisYearBefore) {
+        if (this.storage.hasKey(year) === false) {
             fetch(Spreadparser.getSpreadsheetUrl(...NomineesByYear[year]))
                 .then(response => response.json())
                 .then(data => Spreadparser.parse(data, {titleCase: 'camelCase'}))
@@ -46,6 +47,7 @@ class Nominees extends React.Component {
                         currentYear: year
                     };
                     state.sections = Object.assign(this.state.sections, {[year]: sections});
+                    this.storage.setObject(year, sections);
                     this.setState(state);
                 })
                 .finally(() => {
@@ -55,10 +57,12 @@ class Nominees extends React.Component {
                     });
                 })
         } else {
-            this.setState({
+            const state = {
                 currentYear: year,
                 isLoading: false
-            });
+            };
+            state.sections = Object.assign(this.state.sections, {[year]: this.storage.getObject(year)});
+            this.setState(state);
         }
     }
 
