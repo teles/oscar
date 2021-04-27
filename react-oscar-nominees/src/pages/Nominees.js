@@ -1,11 +1,13 @@
-import React from "react";
-import {withRouter} from "react-router-dom";
-import Spreadparser from "spreadparser";
-import NomineesByYear from "../NomineesByYear";
-import SelectBox from "../components/SelectBox";
-import {dataToSections, titleToId} from "../Utilities";
-import "../css/category.css";
-import Card from "../components/Card";
+import React from 'react';
+import {withRouter} from 'react-router-dom';
+import Spreadparser from 'spreadparser';
+import NomineesByYear from '../NomineesByYear';
+import SelectBox from '../components/SelectBox';
+import {dataToSections, titleToId} from '../Utilities';
+import Card from '../components/Card';
+import '../css/category.css';
+import SingleCheckbox from "../components/SingleCheckbox";
+import CardSkeleton from "../components/CardSkeleton";
 
 class Nominees extends React.Component {
     constructor(props) {
@@ -22,7 +24,8 @@ class Nominees extends React.Component {
         this.state = {
             isLoading: false,
             sections,
-            currentYear: this.options[0].value
+            currentYear: this.options[0].value,
+            showWinners: false
         };
     }
 
@@ -67,13 +70,23 @@ class Nominees extends React.Component {
         this.loadNominees(year);
     }
 
+    onToggleWinners() {
+        this.setState({showWinners: !this.state.showWinners});
+    }
+
     jumpToSection(reference) {
         document.querySelector(`#${reference}`).scrollIntoView({behavior: 'smooth'});
     }
 
     render() {
         const sections = this.state.sections[this.state.currentYear] || [];
-        const {isLoading} = this.state;
+        const {isLoading, showWinners} = this.state;
+
+        const backToTop = () => {
+            document.querySelector('#back-to-top-reference').scrollIntoView({
+                behavior: 'smooth'
+            });
+        };
 
         return <React.Fragment>
             <SelectBox
@@ -88,18 +101,41 @@ class Nominees extends React.Component {
                 id='jump-to-section'
                 options={isLoading ? [{name: 'Loading ...'}] : sections.map(s => ({value: titleToId(s.name), name: s.name}))}
             />
-            {sections.map((section, index) => {
+            <SingleCheckbox
+                checked={showWinners}
+                id='toggle-winner'
+                onToggle={this.onToggleWinners.bind(this)}
+                label='Show winners'
+            />
+            { isLoading
+                ?
+                <section className='category'>
+                    <p className='category__title'>Loading nominees...</p>
+                    <div className='category__cards'>
+                        {Array(5).fill(null).map((item, index) => {
+                            return <CardSkeleton key={index} />
+                        })};
+                    </div>
+                </section>
+                :
+                sections.map((section, index) => {
                 return <section className='category' key={index} id={titleToId(section.name)}>
                     <h2 className='category__title'>{section.name}</h2>
                     <ul className='category__cards u-opacity-on-hover-parent'>
                         {section.items.map((item, innerIndex) => {
                             return <Card
+                                isFeatured={showWinners && item.isWinner }
                                 className='u-opacity-on-hover-parent__item'
                                 key={innerIndex}
                                 {...item}
                             />
                         })}
                     </ul>
+                    <button
+                        onClick={backToTop}
+                        className='category__back-to-top-button'>
+                        Back to top
+                    </button>
                 </section>
             })}
         </React.Fragment>;

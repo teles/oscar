@@ -10,10 +10,6 @@ import Routes from "../Routes";
 import "../css/page.css";
 
 class Page extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.setState({isLoading: true});
     }

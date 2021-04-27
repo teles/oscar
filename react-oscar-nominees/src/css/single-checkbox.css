@@ -1,0 +1,11 @@
+.single-checkbox {
+    font-size: 16px;
+    display: inline-block;
+}
+.single-checkbox__label {
+    color: #fff;
+    cursor: pointer;
+}
+.single-checkbox__checkbox {
+    color: #fff;
+}

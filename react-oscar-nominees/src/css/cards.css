@@ -1,38 +1,73 @@
 @import "base.css";
 
 .card,
-.card--is-selected {
+.card--is-selected,
+.card--is-featured,
+.card--is-loading {
+    color: #fff;
     padding: 2px;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--color-eigengrau);
+    position: relative;
 }
 
 .card--is-selected {
     border: 1px solid var(--color-gold);
 }
 
-.card__content {
+.card--is-featured {
+    color: var(--color-gold);
+}
+.card--is-loading:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 150px;
+    background: linear-gradient(to right, transparent 0%, var(--color-eigengrau) 50%, transparent 100%);
+    animation: load 1s cubic-bezier(.4, .0, .2, 1) infinite;
+}
+
+.card__content,
+.card__content--is-loading {
     padding: 5px;
+}
+.card__content--is-loading {
+    padding: 0;
+    background: #000;
+    height: 30px;
+    margin-top: 10px;
 }
 
 .card__title {
-    color: #fff;
+    color: inherit;
     font-size: 1em;
     margin-top: 10px;
     font-weight: 600;
+    line-height: 1.8;
 }
 
 .card__subtitle {
-    color: var(--color-opaque-white);
+    color: inherit;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    opacity: .6;
+}
+
+.card__subtitle--is-featured {
+    color: inherit;
 }
 
 .card__image {
     object-fit: cover;
     min-height: 255px;
     cursor: pointer;
+    background-color: #000;
 }
+
+

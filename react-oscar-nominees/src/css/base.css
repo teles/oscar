@@ -21,3 +21,12 @@ html body * {
 p {
     margin: 0;
 }
+
+@keyframes load {
+    from {
+        left: -40%;
+    }
+    to   {
+        left: 100%;
+    }
+}
