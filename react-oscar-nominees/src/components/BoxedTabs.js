@@ -1,5 +1,5 @@
 import React from "react";
-import Routes from "../Routes";
+import Routes from "../core/Routes";
 import PropTypes from "prop-types";
 import {Link, withRouter} from "react-router-dom";
 import "../css/boxed-tabs.css";

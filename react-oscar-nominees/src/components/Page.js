@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import PageFooter from "./PageFooter";
 import BoxedTabs from "./BoxedTabs";
-import Routes from "../Routes";
+import Routes from "../core/Routes";
 import "../css/page.css";
 
 class Page extends React.Component {

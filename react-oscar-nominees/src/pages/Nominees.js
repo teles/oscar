@@ -1,13 +1,13 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import Spreadparser from 'spreadparser';
-import NomineesByYear from '../NomineesByYear';
+import NomineesByYear from '../core/NomineesByYear';
 import SelectBox from '../components/SelectBox';
-import {dataToSections, titleToId} from '../Utilities';
+import {dataToSections, titleToId} from '../core/Utilities';
 import Card from '../components/Card';
 import SingleCheckbox from "../components/SingleCheckbox";
 import CardSkeleton from "../components/CardSkeleton";
-import StorageManager from "../StorageManager";
+import StorageManager from "../core/StorageManager";
 import '../css/category.css';
 
 class Nominees extends React.Component {
@@ -26,7 +26,11 @@ class Nominees extends React.Component {
             isLoading: false,
             sections,
             currentYear: this.options[0].value,
-            showWinners: false
+            showWinners: false,
+            favorites: Object.keys(NomineesByYear).reduce((total, year) => {
+                total[year] = {};
+                return total;
+            }, {})
         };
         this.storage = new StorageManager('local');
     }
@@ -38,7 +42,7 @@ class Nominees extends React.Component {
                 .then(response => response.json())
                 .then(data => Spreadparser.parse(data, {titleCase: 'camelCase'}))
                 .then(nominees => {
-                    return dataToSections(nominees.data, x => x.category)
+                    return dataToSections(nominees.data, x => ({name: x.category.name, id: x.category.id}))
                 })
                 .then(sections => {
                     const state = {
@@ -80,6 +84,19 @@ class Nominees extends React.Component {
 
     jumpToSection(reference) {
         document.querySelector(`#${reference}`).scrollIntoView({behavior: 'smooth'});
+    }
+
+    setAsFavorite(nominee, category) {
+        const year = this.state.currentYear;
+        const state = Object.assign({}, this.state);
+        state.favorites[year] = state.favorites[year] || {};
+        state.favorites[year][category.id] = nominee.id;
+        this.setState(state);
+
+        this.props.history.push({
+            search: `?f=${JSON.stringify(this.state.favorites)}`
+        })
+
     }
 
     render() {
@@ -129,8 +146,13 @@ class Nominees extends React.Component {
                         {section.items.map((item, innerIndex) => {
                             return <Card
                                 isFeatured={showWinners && item.isWinner }
+                                isSelected={
+                                    this.state.favorites[this.state.currentYear] &&
+                                    this.state.favorites[this.state.currentYear][section.id] === item.id
+                                }
                                 className='u-opacity-on-hover-parent__item'
                                 key={innerIndex}
+                                onSelect={this.setAsFavorite.bind(this, item, section)}
                                 {...item}
                             />
                         })}

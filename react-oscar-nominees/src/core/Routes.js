@@ -1,6 +1,6 @@
-import Nominees from "./pages/Nominees";
-import Favorites from "./pages/Favorites";
-import WatchList from "./pages/WatchList";
+import Nominees from "../pages/Nominees";
+import Favorites from "../pages/Favorites";
+import WatchList from "../pages/WatchList";
 
 const Routes = {
     home: {
